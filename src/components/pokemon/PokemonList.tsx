@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading";
 import PokemonCard from "./PokemonCard";
@@ -119,8 +119,7 @@ export default function PokemonList() {
     return <div className="text-center mt-8 text-red-500">{error}</div>;
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8 text-center">Pokedex</h1>
+    <React.Fragment>
       <Card className="mb-8">
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4">
@@ -145,6 +144,6 @@ export default function PokemonList() {
         paginate={paginate}
         currentPage={currentPage}
       />
-    </div>
+    </React.Fragment>
   );
 }
