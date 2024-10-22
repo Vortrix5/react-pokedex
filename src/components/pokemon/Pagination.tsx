@@ -1,12 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { ReactElement } from "react";
-
-interface PaginationProps {
-  pokemonPerPage: number;
-  totalPokemon: number;
-  paginate: (pageNumber: number) => void;
-  currentPage: number;
-}
+import { PaginationProps } from "@/types/api";
 
 export default function Pagination({
   pokemonPerPage,

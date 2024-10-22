@@ -1,34 +1,19 @@
 import { useState, useEffect } from "react";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
+import { LoadingSpinner } from "@/components/ui/loading";
 import PokemonCard from "./PokemonCard";
 import Pagination from "./Pagination";
-import { LoadingSpinner } from "./ui/loading";
-
-interface Pokemon {
-  id: number;
-  name: string;
-  types: string[];
-  stats: {
-    hp: number;
-    attack: number;
-    defense: number;
-    speed: number;
-  };
-  sprite: string;
-}
+import PokemonNameSearch from "./PokemonNameSearch";
+import PokemonTypeFiler from "./PokemonTypeFilter";
+import PokemonSort from "./PokemonSort";
+import PokemonAttackSearch from "./PokemonAttackSearch";
+import { Pokemon } from "@/types/api";
 
 export default function PokemonList() {
   const [pokemon, setPokemon] = useState<Pokemon[]>([]);
   const [filteredPokemon, setFilteredPokemon] = useState<Pokemon[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [attack, setAttack] = useState(0);
   const [typeFilter, setTypeFilter] = useState("");
   const [sortBy, setSortBy] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,6 +74,11 @@ export default function PokemonList() {
       );
     }
 
+    if (attack) {
+      result = result.filter((p) => p.stats.attack >= attack);
+      console.log(result);
+    }
+
     if (typeFilter && typeFilter !== "none") {
       result = result.filter((p) => p.types.includes(typeFilter));
     }
@@ -108,7 +98,7 @@ export default function PokemonList() {
 
     setFilteredPokemon(result);
     setCurrentPage(1);
-  }, [searchTerm, typeFilter, sortBy, pokemon]);
+  }, [attack, searchTerm, typeFilter, sortBy, pokemon]);
 
   const indexOfLastPokemon = currentPage * pokemonPerPage;
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
@@ -134,40 +124,13 @@ export default function PokemonList() {
       <Card className="mb-8">
         <CardContent className="p-6">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 md:space-x-4">
-            <Input
-              placeholder="Search Pokémon..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full md:w-1/3"
+            <PokemonNameSearch
+              setSearchTerm={setSearchTerm}
+              searchTerm={searchTerm}
             />
-            <Select onValueChange={setTypeFilter}>
-              <SelectTrigger className="w-full md:w-1/4">
-                <SelectValue placeholder="Filter by type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">All Types</SelectItem>
-                {Array.from(new Set(pokemon.flatMap((p) => p.types))).map(
-                  (type) => (
-                    <SelectItem key={type} value={type}>
-                      {type.charAt(0).toUpperCase() + type.slice(1)}
-                    </SelectItem>
-                  )
-                )}
-              </SelectContent>
-            </Select>
-            <Select onValueChange={setSortBy}>
-              <SelectTrigger className="w-full md:w-1/4">
-                <SelectValue placeholder="Sort by" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="none">No Sort</SelectItem>
-                <SelectItem value="name">Name</SelectItem>
-                <SelectItem value="hp">HP</SelectItem>
-                <SelectItem value="attack">Attack</SelectItem>
-                <SelectItem value="defense">Defense</SelectItem>
-                <SelectItem value="speed">Speed</SelectItem>
-              </SelectContent>
-            </Select>
+            <PokemonAttackSearch setAttack={setAttack} searchTerm={attack} />
+            <PokemonTypeFiler setTypeFilter={setTypeFilter} pokemon={pokemon} />
+            <PokemonSort setSortBy={setSortBy} />
           </div>
         </CardContent>
       </Card>
