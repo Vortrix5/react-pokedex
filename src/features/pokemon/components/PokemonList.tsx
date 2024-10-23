@@ -7,15 +7,15 @@ import PokemonNameSearch from "./PokemonNameSearch";
 import PokemonTypeFiler from "./PokemonTypeFilter";
 import PokemonSort from "./PokemonSort";
 import PokemonAttackSearch from "./PokemonAttackSearch";
-import { Pokemon } from "@/types/api";
+import { Pokemon, SortOptions } from "@/types/api";
 import { usePokemon } from "../api/usePokemon";
 import { usePagination } from "@/hooks/usePagination";
 
 export default function PokemonList() {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [typeFilter, setTypeFilter] = useState("");
-  const [sortBy, setSortBy] = useState("");
-  const [attack, setAttack] = useState(0);
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [typeFilter, setTypeFilter] = useState<string>("");
+  const [sortBy, setSortBy] = useState<SortOptions>("none");
+  const [attack, setAttack] = useState<number>(0);
   const pokemonPerPage = 12;
 
   const { data: pokemon, isLoading, error } = usePokemon();

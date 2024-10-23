@@ -1,5 +1,9 @@
 import { Input } from "@/components/ui/input";
-import { NameSearchProps } from "@/types/api";
+
+type NameSearchProps = {
+  searchTerm: string;
+  setSearchTerm: (value: React.SetStateAction<string>) => void;
+};
 
 const PokemonNameSearch = ({ searchTerm, setSearchTerm }: NameSearchProps) => {
   return (

@@ -36,28 +36,15 @@ export interface PokemonDetails {
   };
 }
 
-export interface PaginationProps {
-  pokemonPerPage: number;
-  totalPokemon: number;
-  paginate: (pageNumber: number) => void;
-  currentPage: number;
-}
+export type SortOptions =
+  | "none"
+  | "name"
+  | "hp"
+  | "defense"
+  | "attack"
+  | "speed";
 
-export type NameSearchProps = {
-  searchTerm: string;
-  setSearchTerm: (value: React.SetStateAction<string>) => void;
-};
-
-export type AttackSearchProps = {
-  searchTerm: number;
-  setAttack: (value: React.SetStateAction<number>) => void;
-};
-
-export type SortByProps = {
-  setSortBy: (value: React.SetStateAction<string>) => void;
-};
-
-export type TypeFilterProps = {
-  setTypeFilter: (value: React.SetStateAction<string>) => void;
-  pokemon: Pokemon[] | undefined;
+export type SortByOption = {
+  value: SortOptions;
+  label: string;
 };

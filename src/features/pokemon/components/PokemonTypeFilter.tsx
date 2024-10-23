@@ -5,7 +5,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { TypeFilterProps } from "@/types/api";
+import { Pokemon } from "@/types/api";
+
+type TypeFilterProps = {
+  setTypeFilter: (value: React.SetStateAction<string>) => void;
+  pokemon: Pokemon[] | undefined;
+};
 
 const PokemonTypeFilter = ({ setTypeFilter, pokemon }: TypeFilterProps) => {
   return (

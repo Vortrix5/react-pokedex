@@ -1,5 +1,9 @@
-import { AttackSearchProps } from "@/types/api";
 import { Input } from "@/components/ui/input";
+
+type AttackSearchProps = {
+  searchTerm: number;
+  setAttack: (value: React.SetStateAction<number>) => void;
+};
 
 const PokemonAttackSearch = ({ searchTerm, setAttack }: AttackSearchProps) => {
   return (
