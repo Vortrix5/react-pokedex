@@ -22,7 +22,7 @@ export default function PokemonList() {
 
   const filteredPokemon = useMemo(() => {
     if (!pokemon) return [];
-    let result = pokemon;
+    let result = [...pokemon];
 
     if (searchTerm) {
       result = result.filter(
@@ -40,6 +40,12 @@ export default function PokemonList() {
       );
     }
 
+    if (attack) {
+      result = result.filter(
+        (pokemonItem) => pokemonItem.stats.attack >= attack
+      );
+    }
+
     if (sortBy && sortBy !== "none") {
       result.sort((a, b) => {
         if (sortBy === "name") {
@@ -54,7 +60,7 @@ export default function PokemonList() {
     }
 
     return result;
-  }, [pokemon, searchTerm, typeFilter, sortBy]);
+  }, [pokemon, searchTerm, typeFilter, attack, sortBy]);
 
   const {
     currentItems: currentPokemon,
