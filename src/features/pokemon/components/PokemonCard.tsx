@@ -1,7 +1,10 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { ReactElement } from "react";
-import { PokemonCardProps } from "@/types/api";
+import { Pokemon } from "@/types/api";
 
+interface PokemonCardProps {
+  pokemon: Pokemon;
+}
 const typeColors: { [key: string]: string } = {
   normal: "bg-gray-400",
   fire: "bg-red-500",

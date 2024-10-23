@@ -15,7 +15,7 @@ const PokemonTypeFilter = ({ setTypeFilter, pokemon }: TypeFilterProps) => {
       </SelectTrigger>
       <SelectContent>
         <SelectItem value="none">All Types</SelectItem>
-        {Array.from(new Set(pokemon.flatMap((p) => p.types))).map((type) => (
+        {Array.from(new Set(pokemon?.flatMap((p) => p.types))).map((type) => (
           <SelectItem key={type} value={type}>
             {type.charAt(0).toUpperCase() + type.slice(1)}
           </SelectItem>

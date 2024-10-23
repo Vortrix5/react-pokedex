@@ -1,25 +1,3 @@
-export interface PaginationProps {
-  pokemonPerPage: number;
-  totalPokemon: number;
-  paginate: (pageNumber: number) => void;
-  currentPage: number;
-}
-
-export interface PokemonCardProps {
-  pokemon: {
-    id: number;
-    name: string;
-    types: string[];
-    stats: {
-      hp: number;
-      attack: number;
-      defense: number;
-      speed: number;
-    };
-    sprite: string;
-  };
-}
-
 export interface Pokemon {
   id: number;
   name: string;
@@ -31,6 +9,38 @@ export interface Pokemon {
     speed: number;
   };
   sprite: string;
+}
+
+export interface PokemonApiResponse {
+  results: {
+    url: string;
+  }[];
+}
+
+export interface PokemonDetails {
+  id: number;
+  name: string;
+  types: {
+    type: {
+      name: string;
+    };
+  }[];
+  stats: {
+    base_stat: number;
+    stat: {
+      name: string;
+    };
+  }[];
+  sprites: {
+    front_default: string;
+  };
+}
+
+export interface PaginationProps {
+  pokemonPerPage: number;
+  totalPokemon: number;
+  paginate: (pageNumber: number) => void;
+  currentPage: number;
 }
 
 export type NameSearchProps = {
@@ -49,5 +59,5 @@ export type SortByProps = {
 
 export type TypeFilterProps = {
   setTypeFilter: (value: React.SetStateAction<string>) => void;
-  pokemon: any[];
+  pokemon: Pokemon[] | undefined;
 };

@@ -1,5 +1,5 @@
 import { ContentLayout } from "@/components/layouts";
-import PokemonList from "../components/pokemon/PokemonList";
+import PokemonList from "@/features/pokemon/components/PokemonList";
 
 export default function Home() {
   return (
