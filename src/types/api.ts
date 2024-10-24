@@ -11,29 +11,31 @@ export interface Pokemon {
   sprite: string;
 }
 
-export interface PokemonApiResponse {
-  results: {
-    url: string;
-  }[];
+export interface PokemonType {
+  pokemon_v2_type: {
+    name: string;
+  };
+}
+
+export interface PokemonStat {
+  base_stat: number;
+  pokemon_v2_stat: {
+    name: string;
+  };
+}
+
+export interface PokemonSprite {
+  sprites: {
+    front_default: string;
+  };
 }
 
 export interface PokemonDetails {
   id: number;
   name: string;
-  types: {
-    type: {
-      name: string;
-    };
-  }[];
-  stats: {
-    base_stat: number;
-    stat: {
-      name: string;
-    };
-  }[];
-  sprites: {
-    front_default: string;
-  };
+  pokemon_v2_pokemontypes: PokemonType[];
+  pokemon_v2_pokemonstats: PokemonStat[];
+  pokemon_v2_pokemonsprites: PokemonSprite[];
 }
 
 export type SortOptions =
